@@ -11,7 +11,7 @@ Hence, you want to make sure to always mask certain sensitive information in you
 
 <em>Introducing privpage!</em>
 
-Using privpage, the following data will be masked in aws cli output
+Using privpage, the following data will be masked in all aws cli output to your screen 
 
 - 12 digit (AWS account) numbers
 - AIDA (IAM User)
@@ -24,7 +24,7 @@ privpage only shows the last 3 characters of an AWS account number and masks eve
 For testing, we add whoiam (who am i or whoami for AWS IAM). When configured correctly, it should not display your full Id and AWS accountnumber.
 
 # Installation
-
+Installation with Homebrew
 ```
 brew tap easytocloud/tap
 brew install privpage
@@ -98,9 +98,11 @@ $ whoiam
 }
 ```
 
+Should you see non-masked output, please verify you have a recent version of the AWS CLI and check your configuration.
+
 # Pager
 The orriginal idea of AWS_PAGER / cli_pager is to page large amounts of output.
-Should the output require paging, you can use the environment variable PRIVPAGE to use your favourite pager:
+Should your output require paging, you can use the environment variable PRIVPAGE to use your favourite pager:
 ```
 export PRIVPAGER=less
 ```
