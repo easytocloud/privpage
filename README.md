@@ -37,12 +37,25 @@ clone this repository and install the privpage script somewhere in your path. Th
 make install
 ```
 
-# Configuration
+# Usage 
 
-The privpage tool is used as an aws cli pager. There are two ways to make use of privpage. 
+Use privpage in much the same way as you would use ```cat``` to see the content of a file, with AWS sensitive information removed. 
+Show the content of your ~/.aws/credentials file with enough information to demonstrate the use,
+without the stress of leaking your access key!
+```
+$ privpage ~/.aws/credentials
+```
+
+# Configuration as AWS pager
+
+The privpage tool can also be used as an aws cli pager. 
+Output of aws cli commands, for as far as it is to stdout, will be processed by privpage before written to the screen. 
+The cli pager doesn't affect non-tty output!
+
+There are two ways to configure using privpage (or any other pager) as aws cli pager.
 
 Either you set the environment variable AWS_PAGER and it works for all profiles
-or you limit it to a specific profile by adding 'cli_pager' to the profile's config block in the file ~/.aws/config
+or you limit it to a specific profile by adding 'cli_pager' to the profile's config block in the file ~/.aws/config or ~/.aws/credentials.
 
 ## Environment
 
@@ -58,6 +71,7 @@ In your .aws/config add the cli_pager line
 [profile masked]
 region=eu-west-1
 cli_pager=privpage
+source_profile=default
 ```
 
 Now you can use the masked profile to mask output. 
@@ -73,7 +87,6 @@ awsprofile masked
 ```
 
 # Testing
-
 When you run whoiam (aws sts get-caller-identity) with privpage installed and configured, sensitive data should be masked in the output.
 
 ```
@@ -85,3 +98,9 @@ $ whoiam
 }
 ```
 
+# Pager
+The orriginal idea of AWS_PAGER / cli_pager is to page large amounts of output.
+Should the output require paging, you can use the environment variable PRIVPAGE to use your favourite pager:
+```
+export PRIVPAGER=less
+```
