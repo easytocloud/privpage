@@ -102,7 +102,26 @@ Should you see non-masked output, please verify you have a recent version of the
 
 # Pager
 The orriginal idea of AWS_PAGER / cli_pager is to page large amounts of output.
-Should your output require paging, you can use the environment variable PRIVPAGE to use your favourite pager:
+Should your output require paging, you can use the environment variable PRIVPAGER to use your favourite pager:
 ```
 export PRIVPAGER=less
+```
+
+# CAUTION
+As aws cli pagers only kick in when writing to a terminal, be very careful ... 
+If you need to page the output, set PRIVPAGER as piping to `more`, `less` or whatever your outpur  will 
+not run through the pager! 
+
+IN STEAD OF
+```
+aws iam list-users | jq ".Users[].Arn". |  more
+```
+USE
+```
+aws iam list-users | jq ".Users[].Arn" | privpage
+```
+
+OR BETTER YET
+```
+aws iam list-users --query "Users[].Arn"
 ```
