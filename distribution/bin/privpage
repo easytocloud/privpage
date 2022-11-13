@@ -4,6 +4,8 @@
 #
 # the privacy pager for AWS CLI
 #
+# (C) easytocloud 2022
+#
 # By default AWS CLI uses less as pager
 # As an instructor I like to demonstrate CLI output
 # without exposing my accountNr, AK/SK etc..
