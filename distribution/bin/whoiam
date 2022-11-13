@@ -1,0 +1,3 @@
+# whoiam is the who am i / whoami for AWS IAM
+
+aws sts get-caller-identity

@@ -1,0 +1,22 @@
+#! /usr/bin/env zsh
+#
+# privpage
+#
+# the privacy pager for AWS CLI
+#
+# By default AWS CLI uses less as pager
+# As an instructor I like to demonstrate CLI output
+# without exposing my accountNr, AK/SK etc..
+#
+# Introducing privpage!
+# It masks part of your privacy sensitive information
+#
+#
+# It currently masks
+# - 12 digit (AWS Account) numbers
+# - strings starting with AIDA, AKIA or AROA
+#
+# Tested on Mac OS but should work on other Unix-like platforms
+
+sed -E  -e 's/[0-9]{9}([0-9]{3})/*********\1/g' \
+        -e 's/(AIDA|AKIA|ASIA|AROA)([A-Z0-9]*)([A-Z0-9]{3})/\1*************\3/g'
