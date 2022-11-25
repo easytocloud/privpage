@@ -40,7 +40,7 @@ jobs:
           # Required - string.
           install: |
             bin.install "distribution/bin/privpage"
-            bin.install "distribution/bin/whoami"
+            bin.install "distribution/bin/whoiam"
 
           # Custom test command for your formula so you can run `brew test`.
           # Optional - string.
