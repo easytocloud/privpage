@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: homebrew-releaser
     steps:
-      - name: Release akskrotate to easytocloud/homebrew-tap
+      - name: Release privpage to easytocloud/homebrew-tap
         uses: Justintime50/homebrew-releaser@v1
         with:
           # The name of the homebrew tap to publish your formula to as it appears on GitHub.
@@ -38,7 +38,7 @@ jobs:
 
           # Custom install command for your formula.
           # Required - string.
-          install: 'bin.install "distribution/bin/akskrotate" => "akskrotate"'
+          install: 'bin.install "distribution/bin/privpage" => "privpage"'
 
           # Custom test command for your formula so you can run `brew test`.
           # Optional - string.
