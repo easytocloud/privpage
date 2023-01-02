@@ -1,4 +1,4 @@
-![release workflow](https://github.com/erikmeinders/privpage/actions/workflows/release.yml/badge.svg)
+![release workflow](https://github.com/easytocloud/privpage/actions/workflows/release.yml/badge.svg)
 
 # privpage
 
