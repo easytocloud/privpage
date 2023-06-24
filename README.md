@@ -1,3 +1,5 @@
+![release workflow](https://github.com/easytocloud/privpage/actions/workflows/release.yml/badge.svg)
+
 # privpage
 
 privpage is the privacy filter you always wanted on AWS cli output.
