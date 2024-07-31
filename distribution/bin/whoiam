@@ -1,5 +1,7 @@
 #! /usr/bin/env zsh
 #
+# (c) easytocloud 2022-2024
+#
 # whoiam is the who am i / whoami for AWS IAM
 #
 
