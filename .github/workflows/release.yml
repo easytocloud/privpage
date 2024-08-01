@@ -35,6 +35,7 @@ jobs:
           GH_TOKEN: ${{ steps.load-github-credentials.outputs.HOMEBREW_TAP_GITHUB_TOKEN  }}
 
       - name: Release privpage to easytocloud/homebrew-tap
+        if: steps.semantic.outputs.new_release_published == 'true'
         uses: Justintime50/homebrew-releaser@v1
         with:
           # The name of the homebrew tap to publish your formula to as it appears on GitHub.
