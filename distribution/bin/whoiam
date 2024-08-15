@@ -1,8 +1,48 @@
-#! /usr/bin/env zsh
+#! /usr/bin/env bash
 #
 # (c) easytocloud 2022-2024
 #
 # whoiam is the who am i / whoami for AWS IAM
 #
 
-aws sts get-caller-identity
+verbose=false
+profile=""
+
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -v|--verbose)
+      verbose=true
+      shift
+      ;;
+    --profile)
+      profile="--profile $2"
+      shift 2
+      ;;
+    *)
+      echo "Unknown option: $1"
+      exit 1
+      ;;
+  esac
+done
+
+# Determine the source of AWS credentials
+if $verbose; then
+  if [[ -n $profile ]]; then
+    echo "Using AWS profile from command-line option: ${profile#--profile }"
+  elif [[ -n $AWS_PROFILE ]]; then
+    echo "Using AWS profile from environment variable: $AWS_PROFILE"
+  elif [[ -n $AWS_ACCESS_KEY_ID && -n $AWS_SECRET_ACCESS_KEY ]]; then
+    echo "Using AWS credentials from environment variables"
+  else
+    # Check if running on an EC2 instance with an instance role
+    if curl -s --connect-timeout 1 http://169.254.169.254/latest/meta-data/iam/security-credentials/ > /dev/null; then
+      echo "Using EC2 instance role"
+    else
+      echo "Using default AWS profile"
+    fi
+  fi
+fi
+
+# Execute the AWS command
+aws sts get-caller-identity $profile
