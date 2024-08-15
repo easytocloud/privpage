@@ -30,6 +30,7 @@ jobs:
           HOMEBREW_TAP_GITHUB_TOKEN: op://CICD/github-easytocloud-brew/credential 
 
       - name: Semantic Release
+        id: semantic
         uses: cycjimmy/semantic-release-action@v4
         env:
           GH_TOKEN: ${{ steps.load-github-credentials.outputs.HOMEBREW_TAP_GITHUB_TOKEN  }}
