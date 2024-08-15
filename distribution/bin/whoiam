@@ -7,6 +7,8 @@
 
 verbose=false
 profile=""
+credentials_file="${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}"
+config_file="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
 
 # Parse command-line arguments
 while [[ $# -gt 0 ]]; do
@@ -26,14 +28,29 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+# Function to check if a profile exists in a file and return the source
+get_profile_source() {
+  local profile_name=$1
+  if grep -q "^\[profile $profile_name\]" "$credentials_file" || grep -q "^\[$profile_name\]" "$credentials_file"; then
+    echo "defined in $credentials_file"
+  elif grep -q "^\[profile $profile_name\]" "$config_file" || grep -q "^\[$profile_name\]" "$config_file"; then
+    echo "defined in $config_file"
+  else
+    echo "NOT FOUND in $config_file or $credentials_file"
+  fi
+}
+
 # Determine the source of AWS credentials
 if $verbose; then
   if [[ -n $profile ]]; then
-    echo "Using AWS profile from command-line option: ${profile#--profile } as defined in ${AWS_SHARED_CREDENTIALS_FILE:-~/.aws/credentials}"
+    profile_name="${profile#--profile }"
+    profile_source=$(get_profile_source "$profile_name")
+    echo "Using profile from command-line option: $profile_name ($profile_source)"
   elif [[ -n $AWS_PROFILE ]]; then
-    echo "Using AWS profile from environment variable: $AWS_PROFILE as defined in ${AWS_SHARED_CREDENTIALS_FILE:-~/.aws/credentials}"
+    profile_source=$(get_profile_source "$AWS_PROFILE")
+    echo "Using profile from \$AWS_PROFILE: $AWS_PROFILE ($profile_source)"
   elif [[ -n $AWS_ACCESS_KEY_ID && -n $AWS_SECRET_ACCESS_KEY ]]; then
-    echo "Using AWS credentials from environment variables \$AWS_ACCESS_KEY_ID etc"
+    echo "Using AWS credentials from AK/SK environment variables"
   else
     # Check if running on an EC2 instance with an instance role
     if curl -s --connect-timeout 1 http://169.254.169.254/latest/meta-data/iam/security-credentials/ > /dev/null; then
