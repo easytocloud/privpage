@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/easytocloud/privpage/compare/v0.3.0...v0.4.0) (2024-08-15)
+
+
+### Features
+
+* --verbose option and improved ci/cd workflow ([7c32f1d](https://github.com/easytocloud/privpage/commit/7c32f1d7a11246b565a4e5795fb986116c775867))
+
 # [0.3.0](https://github.com/easytocloud/privpage/compare/v0.2.4...v0.3.0) (2024-08-15)
 
 
