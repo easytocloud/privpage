@@ -1,3 +1,10 @@
+## [0.4.1](https://github.com/easytocloud/privpage/compare/v0.4.0...v0.4.1) (2024-08-15)
+
+
+### Bug Fixes
+
+* improved profile source output ([e9c0648](https://github.com/easytocloud/privpage/commit/e9c0648671d923be10409f5aab87dfde01900901))
+
 # [0.4.0](https://github.com/easytocloud/privpage/compare/v0.3.0...v0.4.0) (2024-08-15)
 
 
