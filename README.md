@@ -88,7 +88,7 @@ or use our [aws-profile-organizer](https://github.com/easytocloud/aws-profile-or
 awsprofile masked
 ```
 
-# Testing
+# Testing 
 When you run whoiam (aws sts get-caller-identity) with privpage installed and configured, sensitive data should be masked in the output.
 
 ```
@@ -102,6 +102,37 @@ $ whoiam
 
 Should you see non-masked output, please verify you have a recent version of the AWS CLI and check your configuration.
 
+# whoiam
+whoiam is a play on words with the unix commands whoami and who am i.
+It providess information about who the systems thinks you are. 
+The system in this case being AWS IAM. 
+It can be challenging at times to keep track of how your identity is defined.
+The -v option for whoiam displays extra information on the source of the identity.
+```
+$ whoiam -v
+      Name                    Value             Type    Location
+      ----                    -----             ----    --------
+   profile                  default              env    ['AWS_PROFILE', 'AWS_DEFAULT_PROFILE']
+access_key     ****************WZ7A credentials-file    ~/.aws/aws-envs/easytocloud_classic/credentials    
+secret_key     ****************iLcY credentials-file    ~/.aws/aws-envs/easytocloud_classic/credentials    
+    region             eu-central-1      config-file    ~/.aws/aws-envs/easytocloud_classic/config
+{
+    "UserId": "AIDA*************JXI",
+    "Account": "*********688",
+    "Arn": "arn:aws:iam::*********688:user/erik"
+}
+```
+In this example, the profile named 'default' identifies the user.
+This is taken from the environment variable AWS_PROFILE or AWS_DEFAULT_PROFILE
+This profile is referencing an AK/SK combination in a credentials file in ~/.aws/aws-envs/easytocloud_classic.
+This file is identified by the AWS_SHARED_CREDENTIALS_FILE environment variable.
+
+NOTE: It is far from best practice to store credentials this way, please use SSO!
+
+The region is defined in a file named config.
+The remainder of the output is identical to the output of whoiam
+
+
 # Pager
 The orriginal idea of AWS_PAGER / cli_pager is to page large amounts of output.
 Should your output require paging, you can use the environment variable PRIVPAGER to use your favourite pager:
@@ -111,8 +142,8 @@ export PRIVPAGER=less
 
 # CAUTION
 As aws cli pagers only kick in when writing to a terminal, be very careful ... 
-If you need to page the output, set PRIVPAGER as piping to `more`, `less` or whatever your outpur  will 
-not run through the pager! 
+If you need to page the output, set PRIVPAGER. 
+Piping to `more`, `less` or whatever your output  will not run through the AWS_PAGER! 
 
 IN STEAD OF
 ```
