@@ -29,11 +29,11 @@ done
 # Determine the source of AWS credentials
 if $verbose; then
   if [[ -n $profile ]]; then
-    echo "Using AWS profile from command-line option: ${profile#--profile }"
+    echo "Using AWS profile from command-line option: ${profile#--profile } as defined in ${AWS_SHARED_CREDENTIALS_FILE:-~/.aws/credentials}"
   elif [[ -n $AWS_PROFILE ]]; then
-    echo "Using AWS profile from environment variable: $AWS_PROFILE"
+    echo "Using AWS profile from environment variable: $AWS_PROFILE as defined in ${AWS_SHARED_CREDENTIALS_FILE:-~/.aws/credentials}"
   elif [[ -n $AWS_ACCESS_KEY_ID && -n $AWS_SECRET_ACCESS_KEY ]]; then
-    echo "Using AWS credentials from environment variables"
+    echo "Using AWS credentials from environment variables \$AWS_ACCESS_KEY_ID etc"
   else
     # Check if running on an EC2 instance with an instance role
     if curl -s --connect-timeout 1 http://169.254.169.254/latest/meta-data/iam/security-credentials/ > /dev/null; then
