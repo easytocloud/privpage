@@ -1,3 +1,10 @@
+## [0.4.2](https://github.com/easytocloud/privpage/compare/v0.4.1...v0.4.2) (2024-08-15)
+
+
+### Bug Fixes
+
+* improved --verbose implementation ([f6934ef](https://github.com/easytocloud/privpage/commit/f6934ef91af2ac0cb981b48485b058dad5bd694a))
+
 ## [0.4.1](https://github.com/easytocloud/privpage/compare/v0.4.0...v0.4.1) (2024-08-15)
 
 
