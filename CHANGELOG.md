@@ -1,3 +1,10 @@
+## [0.4.3](https://github.com/easytocloud/privpage/compare/v0.4.2...v0.4.3) (2024-10-17)
+
+
+### Bug Fixes
+
+* 4 digits, not 3 ([473b845](https://github.com/easytocloud/privpage/commit/473b845333243fd3623e71b8e14ea636e777e168))
+
 ## [0.4.2](https://github.com/easytocloud/privpage/compare/v0.4.1...v0.4.2) (2024-08-15)
 
 
